@@ -1,0 +1,17 @@
+{
+  "name": "subtensor-js-utils",
+  "version": "1.0.0",
+  "description": "Scripts for running miscellaneous tasks on subtensor",
+  "scripts": {
+    "upgradeRuntime": "node upgradeRuntime.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/runtime": "^7.25.0",
+    "@polkadot/api": "^12.3.1",
+    "@polkadot/keyring": "12.2.1",
+    "@polkadot/util": "^13.0.2",
+    "@polkadot/util-crypto": "^13.0.2"
+  }
+}
