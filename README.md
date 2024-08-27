@@ -44,7 +44,7 @@ node withdraw-address.js
 ```
 
 4. Copy the "Ethereum mirror:" output address
-5. Transfer the amount to this address that you wish to transfer
+5. Transfer the amount to this address that you wish to transfer using Metamask (make sure to clear activity tab data if you restarted the network previously: Settings - Advanced - Clear activity tab data)
 6. Open Extrisics tab in Apps UI: https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9946#/extrinsics
 7. Select `evm` pallet and `withdraw` extrinsic 
 8. Paste the "Ethereum mirror" output address into address field

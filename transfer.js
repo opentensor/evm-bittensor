@@ -1,30 +1,5 @@
 const { ApiPromise, WsProvider, Keyring } = require('@polkadot/api');
-const { blake2AsU8a } = require('@polkadot/util-crypto');
-const { u8aToHex, hexToU8a } = require('@polkadot/util');
-const { encodeAddress } = require('@polkadot/util-crypto');
-
-/**
- * Converts an Ethereum H160 address to a Substrate SS58 address.
- * @param {string} ethAddress - The H160 Ethereum address as a hex string.
- * @return {string} The SS58 encoded Substrate address.
- */
-function convertH160ToSS58(ethAddress) {
-    const prefix = 'evm:';
-    const prefixBytes = new TextEncoder().encode(prefix);
-    const addressBytes = hexToU8a(ethAddress.startsWith('0x') ? ethAddress : `0x${ethAddress}`);
-    const combined = new Uint8Array(prefixBytes.length + addressBytes.length);
-
-    // Concatenate prefix and Ethereum address
-    combined.set(prefixBytes);
-    combined.set(addressBytes, prefixBytes.length);
-
-    // Hash the combined data
-    const hash = blake2AsU8a(combined, 256);
-
-    // Convert the hash to SS58 format
-    const ss58Address = encodeAddress(hash, 42); // Assuming network ID 42, change as per your network
-    return ss58Address;
-}
+const { convertH160ToSS58 } = require('./address-mapping.js');
 
 function sendTransaction(api, call, signer) {
     return new Promise((resolve, reject) => {
@@ -70,7 +45,9 @@ async function main() {
     const sender = keyring.addFromUri('//Alice'); // Your sender's private key/seed
     const recipientEthereumAddress = '0x801A66C22156Bff1B78446A1273b7109E71d7548'; // Ethereum address
     const ss58Address = convertH160ToSS58(recipientEthereumAddress);
-    const amount = "1000000000000000000"; // Amount to send
+    // Amount to send. Using gazillion for now until we have a merged PR into ethereumlists so that Metamask
+    // respects our 9 decimals
+    const amount = "1000000000000000000";
 
     // Alice funds herself
     const txSudoSetBalance = api.tx.sudo.sudo(
