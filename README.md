@@ -33,7 +33,7 @@ yarn install
 node transfer.js
 ```
 
-## Balance transfer from EVM address back to Substrate balances
+## Balance transfer from EVM address back to Substrate balances - method 1: Using evm::withdraw
 
 1. Copy your ss58 address (Example: 5H3qhPGzKMNV9fTPuizxzp8azyFRMd4BnheSuwN9Qxb5Cz3u). You need to have the private key for this address setup in Polkadot JS extension.
 2. Paste it into `ss58Address` in main function in withdraw-address.js script 
@@ -45,8 +45,22 @@ node withdraw-address.js
 
 4. Copy the "Ethereum mirror:" output address
 5. Transfer the amount to this address that you wish to transfer using Metamask (make sure to clear activity tab data if you restarted the network previously: Settings - Advanced - Clear activity tab data)
-6. Open Extrisics tab in Apps UI: https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9946#/extrinsics
-7. Select `evm` pallet and `withdraw` extrinsic 
-8. Paste the "Ethereum mirror" output address into address field
-9. Put the amount you are transferring into amount field. Note that Metamask balances are by 10^9 lower than Polkadot Apps UI balances because Metamask will not respect 10^9 decimals for native currency before we have a corresponding PR to https://github.com/ethereum-lists merged.
-10. Submit transaction
+6. Make sure your destination address is funded to run a transaction
+7. Open Extrisics tab in Apps UI: https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9946#/extrinsics
+8. Select `evm` pallet and `withdraw` extrinsic 
+9. Paste the "Ethereum mirror" output address into address field
+10. Put the amount you are transferring into amount field. Note that Metamask balances are by 10^9 lower than Polkadot Apps UI balances because Metamask will not respect 10^9 decimals for native currency before we have a corresponding PR to https://github.com/ethereum-lists merged.
+11. Submit transaction
+
+## Balance transfer from EVM address back to Substrate balances - method 2: Using a SubtensorBalanceTransfer precompile
+
+1. Copy destination ss58 address (Example: 5H3qhPGzKMNV9fTPuizxzp8azyFRMd4BnheSuwN9Qxb5Cz3u)
+2. Paste it into `const destinationAddress` on top of withdraw.js script 
+3. Copy `secrets-example.js` file to `secrets.js`
+4. Replace `const ethPrivateKey` value with your Ethereum address private key (you can export it from Metamask in account details).
+5. Run:
+
+```bash
+node withdraw.js
+```
+
