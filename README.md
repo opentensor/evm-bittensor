@@ -5,7 +5,7 @@
 ```bash
 git clone https://github.com/opentensor/subtensor
 git checkout feat/evm-rpc
-./scripts/localnet-evm.sh
+./scripts/localnet.sh
 ```
 
 ## 2. Setup Metamask
