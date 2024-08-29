@@ -4,7 +4,7 @@
 
 ```bash
 git clone https://github.com/opentensor/subtensor
-git checkout feat/evm-rpc
+git checkout feat/evm-devnet-ready
 ./scripts/localnet.sh
 ```
 
