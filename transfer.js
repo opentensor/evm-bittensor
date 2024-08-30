@@ -43,7 +43,10 @@ async function main() {
     const keyring = new Keyring({ type: 'sr25519' });
 
     const sender = keyring.addFromUri('//Alice'); // Your sender's private key/seed
-    const recipientEthereumAddress = '0x801A66C22156Bff1B78446A1273b7109E71d7548'; // Ethereum address
+    // Ethereum address that matches the private key from the example secrets: 
+    // 0000000000000000000000000000000000000000000000000000000000000001
+    const recipientEthereumAddress = '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf'; 
+
     const ss58Address = convertH160ToSS58(recipientEthereumAddress);
     // Amount to send. Using gazillion for now until we have a merged PR into ethereumlists so that Metamask
     // respects our 9 decimals
