@@ -1,12 +1,10 @@
 {
-  "name": "subtensor-js-utils",
+  "name": "subtensor-evm-setup",
   "version": "1.0.0",
-  "description": "Scripts for running miscellaneous tasks on subtensor",
-  "scripts": {
-    "upgradeRuntime": "node upgradeRuntime.js"
-  },
+  "description": "Scripts for demonstration of EVM functionality on Subtensor",
+  "scripts": {},
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.25.0",
     "@polkadot/api": "^12.3.1",
