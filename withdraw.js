@@ -1,16 +1,15 @@
 const { ethers } = require('ethers');
-const { ethPrivateKey } = require('./secrets.js');
+const { ApiPromise, WsProvider, Keyring } = require('@polkadot/api');
 const { decodeAddress } = require('@polkadot/util-crypto');
 
-// Substrate ss58 address that will receive the transfer
-const destinationAddress = "5H3qhPGzKMNV9fTPuizxzp8azyFRMd4BnheSuwN9Qxb5Cz3u";
+// PROTECT YOUR PRIVATE KEYS WELL, NEVER COMMIT THEM TO GITHUB OR SHARE WITH ANYONE
+const { ethPrivateKey, subSeed, rpcUrl, wsUrl } = require('./config.js');
 
 // Precompile smart contract address:
 const contractAddress = '0x0000000000000000000000000000000000000800';
 
 // Connect to the Subtensor node
-const providerUrl = 'http://127.0.0.1:9946';
-const provider = new ethers.JsonRpcProvider(providerUrl);
+const provider = new ethers.JsonRpcProvider(rpcUrl);
 
 // This is the SubtensorBalanceTransfer smart contract ABI, located in subtensor repository at: 
 // runtime/src/precompiles/balanceTransfer.abi
@@ -31,8 +30,6 @@ const abi = [
 ];
 
 // Create a signer
-// Normally you would need the private key to send transactions
-// Be careful to protect the private key and preferably load it from an environment variable
 const privateKey = ethPrivateKey;  // DO NOT HARDCODE YOUR PRIVATE KEY IN PRODUCTION
 const signer = new ethers.Wallet(privateKey, provider);
 
@@ -42,8 +39,21 @@ const contract = new ethers.Contract(contractAddress, abi, signer);
 // Function to perform the transfer
 async function makeTransfer() {
     try {
+        // Substrate ss58 address that will receive the transfer
+        const wsProvider = new WsProvider(wsUrl);
+        await ApiPromise.create({ provider: wsProvider });
+        const keyring = new Keyring({ type: 'sr25519' });
+        const account = keyring.addFromUri(subSeed); // Your Substrate address private key/seed
+
+        // Destination address can be replaced with any ss58 address here:
+        const destinationAddress = account.address;
+        // const destinationAddress = "5H3qhPGzKMNV9fTPuizxzp8azyFRMd4BnheSuwN9Qxb5Cz3u";
+        console.log(`Sending balance to ss58 address: ${destinationAddress}`);
+
         // Get the substrate address public key
         const pubk = decodeAddress(destinationAddress);
+        const hex = Array.from(pubk, byte => byte.toString(16).padStart(2, '0')).join('');
+        console.log(`pubk = ${hex}`);
 
         // Sending 1 TAO along with the transaction
         const tx = await contract.transfer(pubk, { value: "1000000000" });

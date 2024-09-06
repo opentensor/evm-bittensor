@@ -1,5 +1,9 @@
+const { ethers } = require('ethers');
 const { ApiPromise, WsProvider, Keyring } = require('@polkadot/api');
 const { convertH160ToSS58 } = require('./address-mapping.js');
+
+// PROTECT YOUR PRIVATE KEYS WELL, NEVER COMMIT THEM TO GITHUB OR SHARE WITH ANYONE
+const { ethPrivateKey, subSeed, rpcUrl, wsUrl } = require('./config.js');
 
 function sendTransaction(api, call, signer) {
     return new Promise((resolve, reject) => {
@@ -38,18 +42,21 @@ function sendTransaction(api, call, signer) {
 }
 
 async function main() {
-    const wsProvider = new WsProvider('ws://127.0.0.1:9946');
+    const wsProvider = new WsProvider(wsUrl);
     const api = await ApiPromise.create({ provider: wsProvider });
     const keyring = new Keyring({ type: 'sr25519' });
 
-    const sender = keyring.addFromUri('//Alice'); // Your sender's private key/seed
-    // Ethereum address that matches the private key from the example secrets: 
-    // 0000000000000000000000000000000000000000000000000000000000000001
-    const recipientEthereumAddress = '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf'; 
+    const sender = keyring.addFromUri(subSeed); // Your sender's private key/seed
+
+    // Get ethereum address that matches the private key from the secrets file
+    const provider = new ethers.JsonRpcProvider(rpcUrl);
+    const signer = new ethers.Wallet(ethPrivateKey, provider);
+    const recipientEthereumAddress = signer.address;
 
     const ss58Address = convertH160ToSS58(recipientEthereumAddress);
-    // Amount to send. Using gazillion for now until we have a merged PR into ethereumlists so that Metamask
-    // respects our 9 decimals
+    console.log(`Mirror: ${ss58Address}`);
+    // Amount to send. Using gazillion for now until Metamask recognizes 9 decimals for 
+    // native currencies
     const amount = "1000000000000000000";
 
     // Alice funds herself
@@ -64,12 +71,8 @@ async function main() {
 
     // Sign and send the transaction
     await sendTransaction(api, transfer, sender);
-    console.log(`Transfer sent (mirror address: ${ss58Address})`);
+    console.log(`Transfer sent to ${recipientEthereumAddress} (its ss58 mirror address is: ${ss58Address})`);
     await api.disconnect();
 }
 
 main().catch(console.error);
-
-
-// curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["0x801A66C22156Bff1B78446A1273b7109E71d7548", "latest"],"id":1}' http://localhost:9946
-// curl -H "Content-type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest", false],"id":1}' http://localhost:9946

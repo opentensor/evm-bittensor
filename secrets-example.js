@@ -1,5 +1,0 @@
-const ethPrivateKey = "0000000000000000000000000000000000000000000000000000000000000001";
-
-module.exports = {
-    ethPrivateKey
-}

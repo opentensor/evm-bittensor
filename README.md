@@ -1,32 +1,18 @@
-# EVM Demo
+# Subtensor EVM Integration Kit
 
-## 1. Run EVM-enabled localnet
 
-```bash
-git clone https://github.com/opentensor/subtensor
-git checkout feat/evm-devnet-ready
-./scripts/localnet.sh
-```
+## Setting up network
 
-## 2. Setup Metamask
+The developer setup can be done in two ways. It includes settings up network URLs, account private keys, and initial balances needed for this guide (and further development).
 
-1. You should have Metamask installed
-2. Create a new account
-3. Setup the network:
-  - Open Metamask settings
-  - Click on "Add a network manually"
-  - Enter 
-    - Network name: "Subtensor"
-    - New RPC URL: "http://localhost:9946"
-    - Chain ID: "964" (This is UTF-8 encoding for Tao character)
-    - Currency symbol: "TAO" 
-  - Click Save
+1. [Using EVM Subtensor TestNet](docs/running-on-testnet.md)
+2. [Local setup](docs/running-locally.md) (requires Rust and tools to be installed)
 
-## Balance transfer from Alice to your address
+## Balance transfer from Substrate (ss58) to EVM (H160) address
 
-1. Copy the H160 account address from Metamask (Example: 0x801A66C22156Bff1B78446A1273b7109E71d7548)
-2. Paste it into `recipientEthereumAddress` in main function in transfer.js scripts
-3. Execute:
+This step is not required if you're working with Subtensor Testnet. It is only essential for starting development with local setup because it transfers some initial TAO balance from the Substrate side to EVM side.
+
+Execute:
 
 ```bash
 yarn install
@@ -35,7 +21,7 @@ node transfer.js
 
 ## Balance transfer from EVM address back to Substrate balances - method 1: Using evm::withdraw
 
-1. Copy your ss58 address (Example: 5H3qhPGzKMNV9fTPuizxzp8azyFRMd4BnheSuwN9Qxb5Cz3u). You need to have the private key for this address setup in Polkadot JS extension.
+1. Copy your ss58 address (Example: 5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty). You need to have the private key for this address setup in Polkadot JS extension.
 2. Paste it into `ss58Address` in main function in withdraw-address.js script 
 3. Execute:
 
@@ -54,13 +40,26 @@ node withdraw-address.js
 
 ## Balance transfer from EVM address back to Substrate balances - method 2: Using a SubtensorBalanceTransfer precompile
 
-1. Copy destination ss58 address (Example: 5H3qhPGzKMNV9fTPuizxzp8azyFRMd4BnheSuwN9Qxb5Cz3u)
-2. Paste it into `const destinationAddress` on top of withdraw.js script 
-3. Copy `secrets-example.js` file to `secrets.js`
-4. Replace `const ethPrivateKey` value with your Ethereum address private key (you can export it from Metamask in account details).
-5. Run:
+This step will transfer 1 TAO to your ss58 address configured with seed phrase in config.js as `subSeed`.
+
+Execute:
 
 ```bash
 node withdraw.js
 ```
+
+Nonetheless, the destination address can be changed to any ss58 address (the private key/seed is not required for it in this step). Look for these lines in `withdraw.js` file:
+
+```javascript
+// Destination address can be replaced with any ss58 address here:
+const destinationAddress = account.address;
+// const destinationAddress = "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty";
+```
+
+## Further examples
+
+- [Hardhat configuration](docs/hardhat-config.md)
+- [Plain vanilla balance transfer (in JS)](docs/plain-vanilla-balance-transfer.md)
+- [Deploying and interacting with ERC-20 token](docs/erc-20.md)
+- [Interaction with staking precompile](docs/staking-precompile.md)
 
