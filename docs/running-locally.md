@@ -17,7 +17,7 @@ git checkout feat/evm-devnet-ready
   - Click on "Add a network manually"
   - Enter 
     - Network name: "Subtensor"
-    - New RPC URL: "http://localhost:9946"
+    - New RPC URL: http://localhost:9946
     - Chain ID: "945" (This is UTF-8 encoding for Alpha character)
     - Currency symbol: "TAO" 
   - Click Save
