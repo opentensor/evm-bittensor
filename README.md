@@ -60,6 +60,6 @@ const destinationAddress = account.address;
 
 - [Hardhat configuration](docs/hardhat-config.md)
 - [Plain vanilla balance transfer (in JS)](docs/plain-vanilla-balance-transfer.md)
-- [Deploying and interacting with ERC-20 token](docs/erc-20.md)
+- [Deploying and interacting with ERC-20 token](https://github.com/gztensor/subtensor-erc20)
 - [Interaction with staking precompile](docs/staking-precompile.md)
 
