@@ -8,6 +8,8 @@ The developer setup can be done in two ways. It includes settings up network URL
 1. [Using EVM Subtensor TestNet](docs/running-on-testnet.md)
 2. [Local setup](docs/running-locally.md) (requires Rust and tools to be installed)
 
+[Testnet Faucet](https://evm-testnet.dev.opentensor.ai/faucet)
+
 ## Balance transfer from Substrate (ss58) to EVM (H160) address
 
 This step is not required if you're working with Subtensor Testnet. It is only essential for starting development with local setup because it transfers some initial TAO balance from the Substrate side to EVM side.

@@ -1,10 +1,13 @@
 # Testing with a local Subtensor devnet
 
-## 1. Setup Metamask
+## 1. Setup Metamask and get Test TAO
 
 1. You should have Metamask installed
 2. Create a new account
-3. Setup the network:
+3. Open the [Faucet page](https://evm-testnet.dev.opentensor.ai/faucet)
+4. Click "Add Chain to Metamask" button 
+
+The network may also be added manually:
   - Open Metamask settings
   - Click on "Add a network manually"
   - Enter 
@@ -14,6 +17,8 @@
     - Currency symbol: "TAO" 
     - Block explorer URL: https://evm-testscan.dev.opentensor.ai/
   - Click Save
+
+5. Click connect icon in the address field or paste your address and click REQUEST 1 TAO button
 
 ## 2. Configure your address private key
 
@@ -31,7 +36,4 @@ cp config-example.js config.js
 const ethPrivateKey = "0000000000000000000000000000000000000000000000000000000000000001";
 ```
 
-## 3. Get testTAO token with faucet
-
-TBD
 
