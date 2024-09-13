@@ -20,7 +20,7 @@ btcli subnet register --subtensor.network localhost:9946
 btcli root nominate --subtensor.network localhost:9946 
 ```
 
-Remember the hotkey address that becomes the delegate. In this example, we are going to use Alice key for simplicity: `5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY` and the public key that matches to this address: 0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d.
+Save the hotkey address that becomes the delegate. In this example, we are going to use Alice key for simplicity: `5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY` and the public key that matches to this address: 0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d. You can convert ss58 address into a public key using [ss58.org](https://ss58.org/).
 
 ### Interaction via a smart contract (Staking Pool use case)
 
