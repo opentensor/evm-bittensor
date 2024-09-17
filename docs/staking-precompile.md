@@ -26,7 +26,7 @@ Save the hotkey address that becomes the delegate. In this example, we are going
 
 If you would like to ineract with staking precompile using just the Metamask wallet as a user, skip to step 6
 
-3. Copy the text of stake.sol contract to Remix IDE and compile it.
+3. Copy the text of stake.sol contract to Remix IDE and compile it. Replace `HOTKEY` constant with your hotkey public key.
 
 4. Connect Remix IDE to Injected Provider - Metamask and your Metamask address that has TAO balance.
 
