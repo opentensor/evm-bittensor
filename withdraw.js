@@ -47,7 +47,6 @@ async function makeTransfer() {
 
         // Destination address can be replaced with any ss58 address here:
         const destinationAddress = account.address;
-        // const destinationAddress = "5H3qhPGzKMNV9fTPuizxzp8azyFRMd4BnheSuwN9Qxb5Cz3u";
         console.log(`Sending balance to ss58 address: ${destinationAddress}`);
 
         // Get the substrate address public key

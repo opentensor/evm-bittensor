@@ -64,4 +64,5 @@ const destinationAddress = account.address;
 - [Plain vanilla balance transfer (in JS)](docs/plain-vanilla-balance-transfer.md)
 - [Deploying and interacting with ERC-20 token](https://github.com/gztensor/subtensor-erc20)
 - [Interaction with staking precompile](docs/staking-precompile.md)
+- [Verification of Ed25519 signature with a precompile](docs/ed25519verify-precompile.md)
 
