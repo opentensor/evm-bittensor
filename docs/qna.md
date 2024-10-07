@@ -71,9 +71,17 @@ Chain ID: 946
 
 ## How can I deploy smart contracts on Bittensor?
 
+TBD
+
 ## How can I mint NFTs on Bittensor?
+
+TBD
 
 ## How can I deploy a token (ERC-20) on Bittensor?
 
+TBD
+
 ## What are the list of ERCs that Bittensor supports (I guarantee you that they are looking for ERC-20, and some flavor of ERC-721/-1155 etc).
+
+TBD
 

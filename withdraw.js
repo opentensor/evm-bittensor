@@ -54,8 +54,8 @@ async function makeTransfer() {
         const hex = Array.from(pubk, byte => byte.toString(16).padStart(2, '0')).join('');
         console.log(`pubk = ${hex}`);
 
-        // Sending 1 TAO along with the transaction
-        const tx = await contract.transfer(pubk, { value: "1000000000" });
+        // Sending 0.5 TAO along with the transaction
+        const tx = await contract.transfer(pubk, { value: "500000000000000000" });
         console.log('Transaction response:', tx);
 
         // Wait for the transaction to be mined

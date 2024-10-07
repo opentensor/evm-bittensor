@@ -55,13 +55,12 @@ async function main() {
 
     const ss58Address = convertH160ToSS58(recipientEthereumAddress);
     console.log(`Mirror: ${ss58Address}`);
-    // Amount to send. Using gazillion for now until Metamask recognizes 9 decimals for 
-    // native currencies
-    const amount = "1000000000000000000";
+    // Amount to send: 1 TAO on Substrate side = 1*10^9
+    const amount = "1000000000";
 
-    // Alice funds herself
+    // Alice funds herself with 1M TAO
     const txSudoSetBalance = api.tx.sudo.sudo(
-        api.tx.balances.forceSetBalance(sender.address, "10000000000000000000")
+        api.tx.balances.forceSetBalance(sender.address, "1000000000000000")
     );
     await sendTransaction(api, txSudoSetBalance, sender);
     console.log('Balace force-set');
