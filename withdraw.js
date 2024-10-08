@@ -41,7 +41,7 @@ async function makeTransfer() {
     try {
         // Substrate ss58 address that will receive the transfer
         const wsProvider = new WsProvider(wsUrl);
-        await ApiPromise.create({ provider: wsProvider });
+        const api = await ApiPromise.create({ provider: wsProvider });
         const keyring = new Keyring({ type: 'sr25519' });
         const account = keyring.addFromUri(subSeed); // Your Substrate address private key/seed
 
@@ -55,14 +55,17 @@ async function makeTransfer() {
         console.log(`pubk = ${hex}`);
 
         // Sending 0.5 TAO along with the transaction
-        const tx = await contract.transfer(pubk, { value: "500000000000000000" });
+        const value = BigInt(0.5 * 1e18).toString();
+        const tx = await contract.transfer(pubk, { value });
         console.log('Transaction response:', tx);
 
         // Wait for the transaction to be mined
         await tx.wait();
         console.log('Transaction confirmed.');
+        await api.disconnect();
     } catch (error) {
         console.error('Error:', error);
+        process.exit(0);
     }
 }
 
