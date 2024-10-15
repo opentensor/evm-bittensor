@@ -43,13 +43,9 @@ Not exactly. The EVM functionality means that BitTensor mimics the programming i
 
 Similarly, BitTensor will have its own address space, block numbers, native currency (TAO), etc. The only thing in common between Ethereum and BitTensor EVM is their programming interface.
 
-## Why does Metamask show that I have balance <0.000001 TAO when I have 1 TAO?
-
-Metamask treats all EVM chains as if they have 18 decimals. TAO only uses 9 decimals, this is why a balance of 1_000_000_000 RAO (1 TAO) shows in Metamask as 0.000000001.
-
 ## What is the gas price in Subtensor EVM?
 
-10 GWei
+Default base fee is 10 GWei per gas unit.
 
 ## What are network parameters to access the Subtensor EVM network?
 
