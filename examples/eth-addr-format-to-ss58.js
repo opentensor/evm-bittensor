@@ -6,10 +6,11 @@ const { convertH160ToSS58 } = require('./address-mapping.js');
 const { ethPrivateKey, subSeed, rpcUrl, wsUrl } = require('./config.js');
 
 async function main() {
-  // Get ethereum address that matches the private key from the secrets file
-  // const recipientEthereumAddress = "put your destination address here";
+  // Paste your Metamask wallet account address (Ethereum H160 address) into recipientEthereumAddress. For example:
   // const recipientEthereumAddress = "0x709615c655B24919F48B365D292521EFcC74467B";
-  const recipientEthereumAddress = "0xd685a847471F7f07Ce36f89F99C198B098B13817";
+  // Run "yarn install" followed by "node eth-addr-format-to-ss58.js".
+  // The script will display the output, for example: "The SS58 address of your Ethereum H160 address is: 5HMd2QQ2XKaQ5gF5wQvKautTvTU21bDMFWVhv2YJ84SQMi6Z"
+  const recipientEthereumAddress = "0x709615c655B24919F48B365D292521EFcC74467B";
   const ss58Address = convertH160ToSS58(recipientEthereumAddress);
   console.log(`For your Ethereum H160 address: ${recipientEthereumAddress}, the SS58 address is: ${ss58Address}`);
   process.exit(0);
