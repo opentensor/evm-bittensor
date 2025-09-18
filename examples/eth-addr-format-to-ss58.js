@@ -1,9 +1,4 @@
-const { ethers } = require('ethers');
-const { ApiPromise, WsProvider, Keyring } = require('@polkadot/api');
 const { convertH160ToSS58 } = require('./address-mapping.js');
-
-// PROTECT YOUR PRIVATE KEYS WELL, NEVER COMMIT THEM TO GITHUB OR SHARE WITH ANYONE
-const { ethPrivateKey, subSeed, rpcUrl, wsUrl } = require('./config.js');
 
 async function main() {
   // Paste your Metamask wallet account address (Ethereum H160 address) into recipientEthereumAddress. For example:
@@ -17,4 +12,4 @@ async function main() {
 }
 
 main().catch(console.error);
-console.warn = () => {};
+console.warn = () => { };
